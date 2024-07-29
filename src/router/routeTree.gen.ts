@@ -11,9 +11,15 @@
 // Import Routes
 
 import { Route as rootRoute } from './../routes/__root'
+import { Route as Collection1Import } from './../routes/collection-1'
 import { Route as IndexImport } from './../routes/index'
 
 // Create/Update Routes
+
+const Collection1Route = Collection1Import.update({
+  path: '/collection-1',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   path: '/',
@@ -31,12 +37,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/collection-1': {
+      id: '/collection-1'
+      path: '/collection-1'
+      fullPath: '/collection-1'
+      preLoaderRoute: typeof Collection1Import
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren({ IndexRoute })
+export const routeTree = rootRoute.addChildren({ IndexRoute, Collection1Route })
 
 /* prettier-ignore-end */
 
@@ -46,11 +59,15 @@ export const routeTree = rootRoute.addChildren({ IndexRoute })
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/"
+        "/",
+        "/collection-1"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/collection-1": {
+      "filePath": "collection-1.tsx"
     }
   }
 }
