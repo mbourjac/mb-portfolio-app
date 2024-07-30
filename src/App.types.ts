@@ -1,4 +1,4 @@
-import type { DefinedRoute } from '../../router/router.types';
+import type { DefinedRoute } from './router/router.types';
 
 export type Collection = {
   index: number;
@@ -7,7 +7,10 @@ export type Collection = {
   date: string;
   picturesCount: number;
   thumbnails: {
-    filePaths: string[];
+    paths: string[];
     opacity: number;
   };
+  pictures: {
+    path: string;
+  }[];
 };

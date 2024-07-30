@@ -1,3 +1,20 @@
+import { Header } from '../../components/Header';
+import { COLLECTION_ONE } from './CollectionOne.constants';
+
 export const CollectionOne = () => {
-  return <div>CollectionOne</div>;
+  const { index, title, date, pictures } = COLLECTION_ONE;
+
+  return (
+    <div className="relative p-2">
+      <div className="fixed left-2 top-2 z-10 flex flex-col gap-2">
+        <Header />
+        <h2 className="active-marker bg-white">{`collection ${String(index)}, ${title ? `${title}, ` : ''}${date}`}</h2>
+      </div>
+      <main className="grid grid-cols-[repeat(auto-fill,minmax(8rem,1fr))] gap-x-1 gap-y-4">
+        {pictures.map(({ path }) => (
+          <img key={path} src={path} alt="" />
+        ))}
+      </main>
+    </div>
+  );
 };

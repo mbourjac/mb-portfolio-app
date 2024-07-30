@@ -6,16 +6,15 @@ export const Header = () => {
 
   return (
     <header className="flex flex-col gap-2">
-      <h1>Michaël Bourjac</h1>
+      <h1 className="w-fit bg-white">Michaël Bourjac</h1>
       <nav>
-        <ul>
+        <ul className="flex flex-col gap-[0.125rem]">
           <li>
             <Link
               to="/"
-              className="flex w-fit items-baseline gap-0.5 hover:text-primary"
+              className="w-fit bg-white hover:text-primary"
               activeProps={{
-                className:
-                  'hover:text-black after:bg-primary after:inline-block after:size-1.5 after:rounded-full',
+                className: 'hover:text-black active-marker',
               }}
             >
               Index
@@ -24,7 +23,7 @@ export const Header = () => {
           <li>
             <a
               href={`mailto:${contactEmail ?? ''}`}
-              className="hover:text-primary"
+              className="bg-white hover:text-primary"
             >
               Contact
             </a>
@@ -34,7 +33,7 @@ export const Header = () => {
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-primary"
+              className="bg-white hover:text-primary"
             >
               Github
             </a>

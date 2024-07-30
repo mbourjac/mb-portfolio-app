@@ -1,7 +1,6 @@
 import { Link } from '@tanstack/react-router';
 import { Header } from '../../components/Header';
 import { COLLECTIONS } from './Home.constants';
-import { sortFilesByIndex } from './Home.helpers';
 
 export const Home = () => {
   return (
@@ -18,16 +17,14 @@ export const Home = () => {
                 >{`collection ${String(index)}, ${title ? `${title}, ` : ''}${date}. ${String(picturesCount)} pictures`}</Link>
               </h2>
               <div className="grid grid-cols-[repeat(auto-fill,minmax(1rem,1fr))] gap-1 2xl:grid-cols-[repeat(auto-fill,minmax(1.125rem,1fr))]">
-                {sortFilesByIndex(thumbnails.filePaths).map(
-                  (filePath, index) => (
-                    <img
-                      key={index}
-                      src={filePath}
-                      alt=""
-                      style={{ opacity: thumbnails.opacity }}
-                    />
-                  ),
-                )}
+                {thumbnails.paths.map((path) => (
+                  <img
+                    key={path}
+                    src={path}
+                    alt=""
+                    style={{ opacity: thumbnails.opacity }}
+                  />
+                ))}
               </div>
             </article>
           ),

@@ -9,3 +9,9 @@
     @apply font-primary font-light uppercase leading-tight;
   }
 }
+
+@layer components {
+  .active-marker {
+    @apply flex items-baseline gap-0.5 after:mr-[1px] after:inline-block after:size-1.5 after:rounded-full after:bg-primary;
+  }
+}
