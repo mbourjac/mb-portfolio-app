@@ -11,8 +11,16 @@ export const CollectionOne = () => {
         <h2 className="active-marker bg-white">{`collection ${String(index)}, ${title ? `${title}, ` : ''}${date}`}</h2>
       </div>
       <main className="grid grid-cols-[repeat(auto-fill,minmax(8rem,1fr))] gap-x-1 gap-y-4">
-        {pictures.map(({ path }) => (
-          <img key={path} src={path} alt="" />
+        {pictures.map(({ path }, index) => (
+          <div
+            key={index}
+            className="relative flex flex-col justify-between transition-colors hover:bg-black hover:text-white"
+          >
+            <img src={path} alt="" />
+            <span className="py-1 text-sm leading-none">
+              {String(index + 1).padStart(3, '0')}
+            </span>
+          </div>
         ))}
       </main>
     </div>
