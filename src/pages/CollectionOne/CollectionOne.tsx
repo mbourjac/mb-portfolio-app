@@ -6,7 +6,7 @@ export const CollectionOne = () => {
 
   return (
     <div className="relative p-2">
-      <div className="fixed left-2 top-2 z-10 flex flex-col gap-2">
+      <div className="pointer-events-none fixed left-2 top-2 z-10 flex flex-col gap-2">
         <Header />
         <h2 className="active-marker bg-white">{`collection ${String(index)}, ${title ? `${title}, ` : ''}${date}`}</h2>
       </div>

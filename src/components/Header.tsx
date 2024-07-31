@@ -12,7 +12,7 @@ export const Header = () => {
           <li>
             <Link
               to="/"
-              className="w-fit bg-white hover:text-primary"
+              className="pointer-events-auto w-fit bg-white hover:text-primary"
               activeProps={{
                 className: 'hover:text-black active-marker',
               }}
@@ -23,7 +23,7 @@ export const Header = () => {
           <li>
             <a
               href={`mailto:${contactEmail ?? ''}`}
-              className="bg-white hover:text-primary"
+              className="pointer-events-auto bg-white hover:text-primary"
             >
               Contact
             </a>
@@ -33,7 +33,7 @@ export const Header = () => {
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white hover:text-primary"
+              className="pointer-events-auto bg-white hover:text-primary"
             >
               Github
             </a>
