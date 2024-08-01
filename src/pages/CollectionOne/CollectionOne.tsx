@@ -1,11 +1,17 @@
-import { useState } from 'react';
+import { useRef } from 'react';
 import { Header } from '../../components/Header';
+import { useGridNavigation } from '../../hooks/use-grid-navigation';
 import { cn } from '../../lib/tailwind';
 import { COLLECTION_ONE } from './CollectionOne.constants';
 
 export const CollectionOne = () => {
-  const [selectedPictureIndex, setSelectedPictureIndex] = useState(0);
+  const gridRef = useRef<HTMLDivElement>(null);
   const { index, title, date, pictures } = COLLECTION_ONE;
+
+  const {
+    currentItemIndex: selectedPictureIndex,
+    setCurrentItemIndex: setSelectedPictureIndex,
+  } = useGridNavigation(gridRef, pictures.length);
 
   const handleSelectPicture = (pictureIndex: number) => {
     setSelectedPictureIndex(pictureIndex);
@@ -25,7 +31,10 @@ export const CollectionOne = () => {
         <div className="col-start-2 row-span-2 overflow-hidden p-2">
           <img src={pictures[selectedPictureIndex]!.path} alt="" />
         </div>
-        <div className="col-start-3 row-span-2 grid w-full grid-cols-[repeat(auto-fill,minmax(5rem,1fr))] gap-x-1 gap-y-4 overflow-auto p-2">
+        <div
+          ref={gridRef}
+          className="col-start-3 row-span-2 grid w-full grid-cols-[repeat(auto-fill,minmax(5rem,1fr))] gap-x-1 gap-y-4 overflow-auto p-2"
+        >
           {pictures.map(({ path }, index) => (
             <button
               key={path}
@@ -38,7 +47,10 @@ export const CollectionOne = () => {
               <img
                 src={path}
                 alt=""
-                className={cn(index === selectedPictureIndex && 'opacity-25')}
+                className={cn(
+                  'transition-opacity',
+                  index === selectedPictureIndex && 'opacity-25',
+                )}
               />
               <span className="py-1 text-sm leading-none">
                 {String(index + 1).padStart(3, '0')}
