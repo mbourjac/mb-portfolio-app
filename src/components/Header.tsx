@@ -5,16 +5,16 @@ export const Header = () => {
   const githubUrl = import.meta.env.VITE_GITHUB_URL;
 
   return (
-    <header className="flex flex-col gap-2">
+    <header className="flex flex-col gap-2 whitespace-nowrap bg-off-black">
       <h1 className="w-fit bg-white">Michaël Bourjac</h1>
       <nav>
-        <ul className="flex flex-col gap-[0.125rem]">
+        <ul className="flex flex-col gap-[0.175rem]">
           <li>
             <Link
               to="/"
-              className="pointer-events-auto w-fit bg-white hover:text-primary"
+              className="block h-full w-fit bg-white hover:text-primary"
               activeProps={{
-                className: 'hover:text-black active-marker',
+                className: 'hover:text-off-black active-marker',
               }}
             >
               Index
@@ -23,7 +23,7 @@ export const Header = () => {
           <li>
             <a
               href={`mailto:${contactEmail ?? ''}`}
-              className="pointer-events-auto bg-white hover:text-primary"
+              className="block h-full w-fit bg-white hover:text-primary"
             >
               Contact
             </a>
@@ -33,7 +33,7 @@ export const Header = () => {
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="pointer-events-auto bg-white hover:text-primary"
+              className="block h-full w-fit bg-white hover:text-primary"
             >
               Github
             </a>

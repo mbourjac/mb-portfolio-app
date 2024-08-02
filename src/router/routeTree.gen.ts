@@ -11,45 +11,63 @@
 // Import Routes
 
 import { Route as rootRoute } from './../routes/__root'
-import { Route as Collection1Import } from './../routes/collection-1'
-import { Route as IndexImport } from './../routes/index'
+import { Route as LayoutImport } from './../routes/_layout'
+import { Route as LayoutIndexImport } from './../routes/_layout/index'
+import { Route as LayoutCollection1Import } from './../routes/_layout/collection-1'
 
 // Create/Update Routes
 
-const Collection1Route = Collection1Import.update({
-  path: '/collection-1',
+const LayoutRoute = LayoutImport.update({
+  id: '/_layout',
   getParentRoute: () => rootRoute,
 } as any)
 
-const IndexRoute = IndexImport.update({
+const LayoutIndexRoute = LayoutIndexImport.update({
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutCollection1Route = LayoutCollection1Import.update({
+  path: '/collection-1',
+  getParentRoute: () => LayoutRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
+    '/_layout': {
+      id: '/_layout'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof LayoutImport
       parentRoute: typeof rootRoute
     }
-    '/collection-1': {
-      id: '/collection-1'
+    '/_layout/collection-1': {
+      id: '/_layout/collection-1'
       path: '/collection-1'
       fullPath: '/collection-1'
-      preLoaderRoute: typeof Collection1Import
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof LayoutCollection1Import
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/': {
+      id: '/_layout/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof LayoutIndexImport
+      parentRoute: typeof LayoutImport
     }
   }
 }
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren({ IndexRoute, Collection1Route })
+export const routeTree = rootRoute.addChildren({
+  LayoutRoute: LayoutRoute.addChildren({
+    LayoutCollection1Route,
+    LayoutIndexRoute,
+  }),
+})
 
 /* prettier-ignore-end */
 
@@ -59,15 +77,23 @@ export const routeTree = rootRoute.addChildren({ IndexRoute, Collection1Route })
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
-        "/collection-1"
+        "/_layout"
       ]
     },
-    "/": {
-      "filePath": "index.tsx"
+    "/_layout": {
+      "filePath": "_layout.tsx",
+      "children": [
+        "/_layout/collection-1",
+        "/_layout/"
+      ]
     },
-    "/collection-1": {
-      "filePath": "collection-1.tsx"
+    "/_layout/collection-1": {
+      "filePath": "_layout/collection-1.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/": {
+      "filePath": "_layout/index.tsx",
+      "parent": "/_layout"
     }
   }
 }

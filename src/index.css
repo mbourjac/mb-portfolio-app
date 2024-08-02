@@ -6,7 +6,7 @@
 
 @layer base {
   body {
-    @apply font-primary font-light uppercase leading-tight;
+    @apply text-off-black font-primary font-light uppercase leading-tight;
   }
 }
 
