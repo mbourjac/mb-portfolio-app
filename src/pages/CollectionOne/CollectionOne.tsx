@@ -12,6 +12,7 @@ export const CollectionOne = () => {
   const {
     currentItemIndex: selectedPictureIndex,
     setCurrentItemIndex: setSelectedPictureIndex,
+    itemsRefs,
   } = useGridNavigation(gridRef, pictures.length);
 
   const handleSelectPicture = (pictureIndex: number) => {
@@ -37,9 +38,10 @@ export const CollectionOne = () => {
             key={path}
             onClick={() => handleSelectPicture(index)}
             className={cn(
-              'relative flex flex-col justify-between transition-colors hover:bg-off-black hover:text-white',
+              'relative flex flex-col justify-between transition-colors hover:bg-off-black hover:text-white focus-visible:bg-off-black focus-visible:text-white focus-visible:outline-none',
               index === selectedPictureIndex && 'bg-off-black text-white',
             )}
+            ref={(node) => (itemsRefs.current[index] = node)}
           >
             <div
               className="absolute w-full bg-black"

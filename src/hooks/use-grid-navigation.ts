@@ -1,4 +1,4 @@
-import { useEffect, useState, type RefObject } from 'react';
+import { useEffect, useRef, useState, type RefObject } from 'react';
 
 export const useGridNavigation = <T extends HTMLElement>(
   gridRef: RefObject<T>,
@@ -6,6 +6,7 @@ export const useGridNavigation = <T extends HTMLElement>(
 ) => {
   const [currentItemIndex, setCurrentItemIndex] = useState(0);
   const [gridColumnsCount, setGridColumnsCount] = useState(0);
+  const itemsRefs = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
     const updateGridColumnsCount = () => {
@@ -36,23 +37,27 @@ export const useGridNavigation = <T extends HTMLElement>(
     const handleKeyDown = (event: KeyboardEvent) => {
       switch (event.key) {
         case 'ArrowRight':
+          event.preventDefault();
           setCurrentItemIndex((prevIndex) => (prevIndex + 1) % gridItemsCount);
           break;
         case 'ArrowLeft':
+          event.preventDefault();
           setCurrentItemIndex(
             (prevIndex) => (prevIndex - 1 + gridItemsCount) % gridItemsCount,
           );
           break;
         case 'ArrowDown':
-          if (currentItemIndex + gridColumnsCount > gridItemsCount - 1) break; // Prevent moving down if in the last row
+          if (currentItemIndex + gridColumnsCount > gridItemsCount - 1) break; // Prevent moving down from the last row
 
+          event.preventDefault();
           setCurrentItemIndex(
             (prevIndex) => (prevIndex + gridColumnsCount) % gridItemsCount,
           );
           break;
         case 'ArrowUp':
-          if (currentItemIndex - gridColumnsCount < 0) break; // Prevent moving down if in the last row
+          if (currentItemIndex - gridColumnsCount < 0) break; // Prevent moving up from the first row
 
+          event.preventDefault();
           setCurrentItemIndex(
             (prevIndex) =>
               (prevIndex - gridColumnsCount + gridItemsCount) % gridItemsCount,
@@ -68,8 +73,17 @@ export const useGridNavigation = <T extends HTMLElement>(
     };
   }, [currentItemIndex, gridItemsCount, gridColumnsCount]);
 
+  useEffect(() => {
+    const currentItem = itemsRefs.current[currentItemIndex];
+
+    if (currentItem) {
+      currentItem.focus();
+    }
+  }, [currentItemIndex]);
+
   return {
     currentItemIndex,
     setCurrentItemIndex,
+    itemsRefs,
   };
 };
