@@ -10,7 +10,10 @@ export type Collection = {
     paths: string[];
     opacity: number;
   };
-  pictures: {
-    path: string;
-  }[];
+  pictures: Picture[];
+};
+
+export type Picture = {
+  path: string;
+  aspectRatio?: number;
 };

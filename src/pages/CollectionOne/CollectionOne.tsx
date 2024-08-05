@@ -1,10 +1,12 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useGridNavigation } from '../../hooks/use-grid-navigation';
 import { cn } from '../../lib/tailwind';
 import { COLLECTION_ONE } from './CollectionOne.constants';
 
 export const CollectionOne = () => {
   const gridRef = useRef<HTMLDivElement>(null);
+  const [loadedPicturesCount, setLoadedPicturesCount] = useState(0);
+
   const { index, title, date, pictures } = COLLECTION_ONE;
 
   const {
@@ -30,22 +32,33 @@ export const CollectionOne = () => {
         ref={gridRef}
         className="col-start-3 row-span-2 grid w-full grid-cols-[repeat(auto-fill,minmax(5rem,1fr))] gap-x-1 gap-y-4 overflow-auto p-2"
       >
-        {pictures.map(({ path }, index) => (
+        {pictures.map(({ path, aspectRatio }, index) => (
           <button
             key={path}
             onClick={() => handleSelectPicture(index)}
             className={cn(
-              'flex flex-col justify-between transition-colors hover:bg-off-black hover:text-white',
+              'relative flex flex-col justify-between transition-colors hover:bg-off-black hover:text-white',
               index === selectedPictureIndex && 'bg-off-black text-white',
             )}
           >
+            <div
+              className="absolute w-full bg-black"
+              style={{ aspectRatio }}
+            ></div>
             <img
               src={path}
               alt=""
+              style={{ aspectRatio }}
               className={cn(
-                'transition-opacity',
+                'relative w-full bg-off-black transition-opacity',
                 index === selectedPictureIndex && 'opacity-25',
+                loadedPicturesCount !== pictures.length && 'opacity-0',
               )}
+              onLoad={() =>
+                setLoadedPicturesCount(
+                  (prevLoadedPicturesCount) => prevLoadedPicturesCount + 1,
+                )
+              }
             />
             <span className="py-1 text-sm leading-none">
               {String(index + 1).padStart(3, '0')}
