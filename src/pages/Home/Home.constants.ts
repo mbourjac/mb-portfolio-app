@@ -1,5 +1,10 @@
-import type { Collection } from '../../App.types';
-import { COLLECTION_ONE } from '../CollectionOne/CollectionOne.constants';
-import { COLLECTION_TWO } from '../CollectionTwo/CollectionTwo.constants';
+import type { Collection } from '../../features/collection/collection.model';
+import { collectionOne } from '../CollectionOne/CollectionOne.constants';
+import { collectionThree } from '../CollectionThree/CollectionThree.constants';
+import { collectionTwo } from '../CollectionTwo/CollectionTwo.constants';
 
-export const COLLECTIONS: Collection[] = [COLLECTION_TWO, COLLECTION_ONE];
+export const COLLECTIONS: Collection[] = [
+  collectionThree,
+  collectionTwo,
+  collectionOne,
+];

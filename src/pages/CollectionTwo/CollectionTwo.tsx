@@ -1,6 +1,6 @@
 import { Collection } from '../../components/Collection';
-import { COLLECTION_TWO } from './CollectionTwo.constants';
+import { collectionTwo } from './CollectionTwo.constants';
 
 export const CollectionTwo = () => {
-  return <Collection {...COLLECTION_TWO} />;
+  return <Collection collection={collectionTwo} />;
 };

@@ -1,15 +1,14 @@
 import { useRef, useState } from 'react';
-import type { Collection as CollectionType } from '../App.types';
+import type { Collection as CollectionType } from '../features/collection/collection.model';
 import { useGridNavigation } from '../hooks/use-grid-navigation';
 import { cn } from '../lib/tailwind';
 
-type CollectionProps = CollectionType;
+type CollectionProps = {
+  collection: CollectionType;
+};
 
 export const Collection = ({
-  index,
-  title,
-  date,
-  pictures,
+  collection: { baseInfo, pictures },
 }: CollectionProps) => {
   const gridRef = useRef<HTMLDivElement>(null);
   const [loadedPicturesCount, setLoadedPicturesCount] = useState(0);
@@ -28,7 +27,7 @@ export const Collection = ({
     <main className="col-span-3 col-start-1 row-span-2 row-start-1 grid grid-cols-subgrid grid-rows-subgrid overflow-hidden">
       <div className="relative z-10 col-start-1 row-start-2 whitespace-nowrap px-2 pb-2">
         <div className="flex flex-col gap-2 bg-off-black pt-2">
-          <h2 className="active-marker w-fit bg-white">{`collection ${String(index)}, ${title ? `${title}, ` : ''}${date}`}</h2>
+          <h2 className="active-marker w-fit bg-white">{baseInfo}</h2>
         </div>
       </div>
       <div className="col-start-2 row-span-2 flex flex-col gap-2 overflow-auto p-2">
