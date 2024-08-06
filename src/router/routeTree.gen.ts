@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './../routes/__root'
 import { Route as LayoutImport } from './../routes/_layout'
 import { Route as LayoutIndexImport } from './../routes/_layout/index'
+import { Route as LayoutCollection2Import } from './../routes/_layout/collection-2'
 import { Route as LayoutCollection1Import } from './../routes/_layout/collection-1'
 
 // Create/Update Routes
@@ -24,6 +25,11 @@ const LayoutRoute = LayoutImport.update({
 
 const LayoutIndexRoute = LayoutIndexImport.update({
   path: '/',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutCollection2Route = LayoutCollection2Import.update({
+  path: '/collection-2',
   getParentRoute: () => LayoutRoute,
 } as any)
 
@@ -50,6 +56,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutCollection1Import
       parentRoute: typeof LayoutImport
     }
+    '/_layout/collection-2': {
+      id: '/_layout/collection-2'
+      path: '/collection-2'
+      fullPath: '/collection-2'
+      preLoaderRoute: typeof LayoutCollection2Import
+      parentRoute: typeof LayoutImport
+    }
     '/_layout/': {
       id: '/_layout/'
       path: '/'
@@ -65,6 +78,7 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren({
   LayoutRoute: LayoutRoute.addChildren({
     LayoutCollection1Route,
+    LayoutCollection2Route,
     LayoutIndexRoute,
   }),
 })
@@ -84,11 +98,16 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "_layout.tsx",
       "children": [
         "/_layout/collection-1",
+        "/_layout/collection-2",
         "/_layout/"
       ]
     },
     "/_layout/collection-1": {
       "filePath": "_layout/collection-1.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/collection-2": {
+      "filePath": "_layout/collection-2.tsx",
       "parent": "/_layout"
     },
     "/_layout/": {
