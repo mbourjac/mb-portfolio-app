@@ -1,4 +1,4 @@
-import { Collection } from '../../components/Collection';
+import { Collection } from '../../components/Collection/Collection';
 import { collectionTwo } from './CollectionTwo.constants';
 
 export const CollectionTwo = () => {

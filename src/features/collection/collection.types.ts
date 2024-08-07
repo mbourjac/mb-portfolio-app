@@ -11,10 +11,17 @@ export type CollectionConfig = {
   };
   picturesConfig: {
     paths: Record<string, string>;
-    data: PictureData[];
+    data: (PictureData | PictureData[])[];
   };
 };
 
 export type PictureData = {
+  title?: string;
+  date?: Date;
+  coordinates?: [number, number];
   aspectRatio?: number;
+};
+
+export type Picture = PictureData & {
+  path: string;
 };
