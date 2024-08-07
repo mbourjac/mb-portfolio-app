@@ -4,7 +4,7 @@ import { collectionThree } from '../CollectionThree/CollectionThree.constants';
 import { collectionTwo } from '../CollectionTwo/CollectionTwo.constants';
 
 export const COLLECTIONS: Collection[] = [
-  collectionThree,
-  collectionTwo,
   collectionOne,
+  collectionTwo,
+  collectionThree,
 ];
