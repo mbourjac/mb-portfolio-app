@@ -4,10 +4,21 @@ export class Collection {
   constructor(readonly config: CollectionConfig) {}
 
   get thumbnails() {
-    const sortedPaths = this.sortPathsByIndex(
+    const sortedThumbnailPaths = this.sortPathsByIndex(
       this.config.thumbnailsConfig.paths,
     );
-    return sortedPaths.map((path) => ({ path }));
+    const { data: picturesData } = this.config.picturesConfig;
+
+    const thumbnailsCount = sortedThumbnailPaths.length;
+    const picturesDataItemsCount = picturesData.length;
+
+    if (thumbnailsCount !== picturesDataItemsCount) {
+      throw new Error(
+        `Collection ${String(this.config.index)}: the number of thumbnails (${String(thumbnailsCount)}) does not match the number of picture data entries (${String(picturesDataItemsCount)}).`,
+      );
+    }
+
+    return sortedThumbnailPaths.map((path) => ({ path }));
   }
 
   get pictures() {
