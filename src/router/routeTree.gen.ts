@@ -13,9 +13,7 @@
 import { Route as rootRoute } from './../routes/__root'
 import { Route as LayoutImport } from './../routes/_layout'
 import { Route as LayoutIndexImport } from './../routes/_layout/index'
-import { Route as LayoutCollection3Import } from './../routes/_layout/collection-3'
-import { Route as LayoutCollection2Import } from './../routes/_layout/collection-2'
-import { Route as LayoutCollection1Import } from './../routes/_layout/collection-1'
+import { Route as LayoutCollectionsCollectionIdImport } from './../routes/_layout/collections.$collectionId'
 
 // Create/Update Routes
 
@@ -29,20 +27,11 @@ const LayoutIndexRoute = LayoutIndexImport.update({
   getParentRoute: () => LayoutRoute,
 } as any)
 
-const LayoutCollection3Route = LayoutCollection3Import.update({
-  path: '/collection-3',
-  getParentRoute: () => LayoutRoute,
-} as any)
-
-const LayoutCollection2Route = LayoutCollection2Import.update({
-  path: '/collection-2',
-  getParentRoute: () => LayoutRoute,
-} as any)
-
-const LayoutCollection1Route = LayoutCollection1Import.update({
-  path: '/collection-1',
-  getParentRoute: () => LayoutRoute,
-} as any)
+const LayoutCollectionsCollectionIdRoute =
+  LayoutCollectionsCollectionIdImport.update({
+    path: '/collections/$collectionId',
+    getParentRoute: () => LayoutRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -55,32 +44,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutImport
       parentRoute: typeof rootRoute
     }
-    '/_layout/collection-1': {
-      id: '/_layout/collection-1'
-      path: '/collection-1'
-      fullPath: '/collection-1'
-      preLoaderRoute: typeof LayoutCollection1Import
-      parentRoute: typeof LayoutImport
-    }
-    '/_layout/collection-2': {
-      id: '/_layout/collection-2'
-      path: '/collection-2'
-      fullPath: '/collection-2'
-      preLoaderRoute: typeof LayoutCollection2Import
-      parentRoute: typeof LayoutImport
-    }
-    '/_layout/collection-3': {
-      id: '/_layout/collection-3'
-      path: '/collection-3'
-      fullPath: '/collection-3'
-      preLoaderRoute: typeof LayoutCollection3Import
-      parentRoute: typeof LayoutImport
-    }
     '/_layout/': {
       id: '/_layout/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof LayoutIndexImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/collections/$collectionId': {
+      id: '/_layout/collections/$collectionId'
+      path: '/collections/$collectionId'
+      fullPath: '/collections/$collectionId'
+      preLoaderRoute: typeof LayoutCollectionsCollectionIdImport
       parentRoute: typeof LayoutImport
     }
   }
@@ -90,10 +65,8 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   LayoutRoute: LayoutRoute.addChildren({
-    LayoutCollection1Route,
-    LayoutCollection2Route,
-    LayoutCollection3Route,
     LayoutIndexRoute,
+    LayoutCollectionsCollectionIdRoute,
   }),
 })
 
@@ -111,26 +84,16 @@ export const routeTree = rootRoute.addChildren({
     "/_layout": {
       "filePath": "_layout.tsx",
       "children": [
-        "/_layout/collection-1",
-        "/_layout/collection-2",
-        "/_layout/collection-3",
-        "/_layout/"
+        "/_layout/",
+        "/_layout/collections/$collectionId"
       ]
-    },
-    "/_layout/collection-1": {
-      "filePath": "_layout/collection-1.tsx",
-      "parent": "/_layout"
-    },
-    "/_layout/collection-2": {
-      "filePath": "_layout/collection-2.tsx",
-      "parent": "/_layout"
-    },
-    "/_layout/collection-3": {
-      "filePath": "_layout/collection-3.tsx",
-      "parent": "/_layout"
     },
     "/_layout/": {
       "filePath": "_layout/index.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/collections/$collectionId": {
+      "filePath": "_layout/collections.$collectionId.tsx",
       "parent": "/_layout"
     }
   }

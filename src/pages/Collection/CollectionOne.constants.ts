@@ -134,8 +134,7 @@ const COLLECTION_ONE_PICTURES_CONFIG: CollectionConfig['picturesConfig'] = {
 };
 
 const COLLECTION_ONE_CONFIG: CollectionConfig = {
-  index: 1,
-  pathname: '/collection-1',
+  id: 1,
   title: 'paris',
   date: '2015 —',
   thumbnailsConfig: {

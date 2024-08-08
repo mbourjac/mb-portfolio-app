@@ -1,19 +1,18 @@
 import type { ReactNode } from 'react';
-import { Link } from '@tanstack/react-router';
+import { Link, type LinkOptions } from '@tanstack/react-router';
 
-type CollectionNavLinkProps = {
-  to: string;
+type CollectionNavLinkProps = LinkOptions & {
   isActive: boolean;
   children: ReactNode;
 };
 
 export const CollectionNavLink = ({
-  to,
   isActive,
   children,
+  ...restProps
 }: CollectionNavLinkProps) => {
   return isActive ?
-      <Link to={to} className="w-fit bg-white">
+      <Link {...restProps} className="w-fit bg-white">
         {children}
       </Link>
     : <p

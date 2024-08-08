@@ -300,8 +300,7 @@ const COLLECTION_THREE_PICTURES_CONFIG: CollectionConfig['picturesConfig'] = {
 };
 
 const COLLECTION_THREE_CONFIG: CollectionConfig = {
-  index: 3,
-  pathname: '/collection-3',
+  id: 3,
   title: 'japon',
   date: '2019 7.15 — 8.13',
   thumbnailsConfig: {

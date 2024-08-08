@@ -1,8 +1,5 @@
-import type { DefinedRoute } from '../../router/router.types';
-
 export type CollectionConfig = {
-  index: number;
-  pathname: DefinedRoute;
+  id: number;
   title?: string;
   date: string;
   thumbnailsConfig: {

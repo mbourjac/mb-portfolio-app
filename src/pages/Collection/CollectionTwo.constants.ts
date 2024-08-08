@@ -116,8 +116,7 @@ const COLLECTION_TWO_PICTURES_CONFIG: CollectionConfig['picturesConfig'] = {
 };
 
 const COLLECTION_TWO_CONFIG: CollectionConfig = {
-  index: 2,
-  pathname: '/collection-2',
+  id: 2,
   title: 'sud',
   date: '2014 —',
   thumbnailsConfig: {

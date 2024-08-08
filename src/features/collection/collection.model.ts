@@ -14,7 +14,7 @@ export class Collection {
 
     if (thumbnailsCount !== picturesDataItemsCount) {
       throw new Error(
-        `Collection ${String(this.config.index)}: the number of thumbnails (${String(thumbnailsCount)}) does not match the number of picture data entries (${String(picturesDataItemsCount)}).`,
+        `Collection ${String(this.config.id)}: the number of thumbnails (${String(thumbnailsCount)}) does not match the number of picture data entries (${String(picturesDataItemsCount)}).`,
       );
     }
 
@@ -32,7 +32,7 @@ export class Collection {
 
     if (picturesCount !== picturePathsCount) {
       throw new Error(
-        `Collection ${String(this.config.index)}: the number of pictures (${String(picturesCount)}) does not match the number of picture paths (${String(picturePathsCount)}).`,
+        `Collection ${String(this.config.id)}: the number of pictures (${String(picturesCount)}) does not match the number of picture paths (${String(picturePathsCount)}).`,
       );
     }
 
@@ -58,8 +58,8 @@ export class Collection {
   }
 
   get baseInfo() {
-    const { index, title, date } = this.config;
-    return `collection ${String(index)}, ${title ? `${title}, ` : ''}${date}`;
+    const { id, title, date } = this.config;
+    return `collection ${String(id)}, ${title ? `${title}, ` : ''}${date}`;
   }
 
   get fullInfo() {
