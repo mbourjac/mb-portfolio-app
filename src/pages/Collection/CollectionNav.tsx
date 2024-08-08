@@ -1,4 +1,4 @@
-import { COLLECTIONS } from '../../pages/Home/Home.constants';
+import { useCollections } from '../../hooks/use-collections';
 import { CollectionNavLink } from './CollectionNavLink';
 
 type CollectionNavProps = {
@@ -6,8 +6,10 @@ type CollectionNavProps = {
 };
 
 export const CollectionNav = ({ currentCollectionId }: CollectionNavProps) => {
+  const collections = useCollections();
+
   const isFirstCollection = currentCollectionId === 1;
-  const isLastCollection = currentCollectionId === COLLECTIONS.length;
+  const isLastCollection = currentCollectionId === collections.length;
 
   return (
     <nav className="flex flex-col gap-[0.175rem]" aria-label="Collections">

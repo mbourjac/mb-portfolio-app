@@ -1,6 +1,5 @@
 import { createFileRoute, notFound } from '@tanstack/react-router';
 import { Collection } from '../../pages/Collection/Collection';
-import { COLLECTIONS } from '../../pages/Home/Home.constants';
 
 export const Route = createFileRoute('/_layout/collections/$collectionId')({
   component: () => {
@@ -8,8 +7,8 @@ export const Route = createFileRoute('/_layout/collections/$collectionId')({
     const { collectionId } = Route.useParams();
     return <Collection key={collectionId} />;
   },
-  loader: ({ params: { collectionId } }) => {
-    const collection = COLLECTIONS.find(
+  loader: ({ params: { collectionId }, context: { collections } }) => {
+    const collection = collections.find(
       (collection) => collection.config.id === Number(collectionId),
     );
 

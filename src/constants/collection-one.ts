@@ -1,5 +1,5 @@
-import { Collection } from '../../features/collection/collection.model';
-import type { CollectionConfig } from '../../features/collection/collection.types';
+import { Collection } from '../features/collection/collection.model';
+import type { CollectionConfig } from '../features/collection/collection.types';
 
 const COLLECTION_ONE_PICTURES_CONFIG: CollectionConfig['picturesConfig'] = {
   paths: import.meta.glob('@assets/collection-1/pictures/*.{jpg,jpeg,JPEG}', {
@@ -150,4 +150,4 @@ const COLLECTION_ONE_CONFIG: CollectionConfig = {
   picturesConfig: COLLECTION_ONE_PICTURES_CONFIG,
 };
 
-export const collectionOne = new Collection(COLLECTION_ONE_CONFIG);
+export const COLLECTION_ONE = new Collection(COLLECTION_ONE_CONFIG);
