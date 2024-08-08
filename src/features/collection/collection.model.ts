@@ -11,27 +11,32 @@ export class Collection {
   }
 
   get pictures() {
-    const sortedPaths = this.sortPathsByIndex(this.config.picturesConfig.paths);
+    const sortedPicturePaths = this.sortPathsByIndex(
+      this.config.picturesConfig.paths,
+    );
     const { data: picturesData } = this.config.picturesConfig;
 
-    if (picturesData.flat().length !== sortedPaths.length) {
+    const picturePathsCount = sortedPicturePaths.length;
+    const picturesCount = picturesData.flat().length;
+
+    if (picturesCount !== picturePathsCount) {
       throw new Error(
-        `The number of picture data entries (${String(picturesData.length)}) does not match the number of picture paths (${String(sortedPaths.length)}).`,
+        `Collection ${String(this.config.index)}: the number of pictures (${String(picturesCount)}) does not match the number of picture paths (${String(picturePathsCount)}).`,
       );
     }
 
     let pathIndex = 0;
 
-    return picturesData.map((picturesDataEntry) =>
-      Array.isArray(picturesDataEntry) ?
-        picturesDataEntry.map((subPicturesDataEntry) => ({
-          ...subPicturesDataEntry,
-          path: sortedPaths[pathIndex]!,
+    return picturesData.map((picturesDataItem) =>
+      Array.isArray(picturesDataItem) ?
+        picturesDataItem.map((subPicturesDataItem) => ({
+          ...subPicturesDataItem,
+          path: sortedPicturePaths[pathIndex]!,
           index: String(++pathIndex).padStart(3, '0'),
         }))
       : {
-          ...picturesDataEntry,
-          path: sortedPaths[pathIndex]!,
+          ...picturesDataItem,
+          path: sortedPicturePaths[pathIndex]!,
           index: String(++pathIndex).padStart(3, '0'),
         },
     );
