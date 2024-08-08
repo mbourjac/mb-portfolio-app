@@ -7,7 +7,7 @@ export const Header = () => {
   return (
     <header className="flex flex-col gap-2 whitespace-nowrap bg-off-black">
       <h1 className="w-fit bg-white">Michaël Bourjac</h1>
-      <nav>
+      <nav aria-label="Main">
         <ul className="flex flex-col gap-[0.175rem]">
           <li>
             <Link

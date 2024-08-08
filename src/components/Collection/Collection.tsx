@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import type { Collection as CollectionType } from '../../features/collection/collection.model';
 import { useGridNavigation } from '../../hooks/use-grid-navigation';
 import { cn } from '../../lib/tailwind';
+import { CollectionNav } from './CollectionNav';
 import { CollectionSlides } from './CollectionSlides';
 
 type CollectionProps = {
@@ -31,6 +32,7 @@ export const Collection = ({
       <div className="relative z-10 col-start-1 row-start-2 whitespace-nowrap px-2 pb-2">
         <div className="flex flex-col gap-2 bg-off-black pt-2">
           <h2 className="active-marker w-fit bg-white">{baseInfo}</h2>
+          <CollectionNav />
         </div>
       </div>
       <div className="col-start-2 row-span-2 flex flex-col gap-2 overflow-auto p-2">
@@ -58,7 +60,7 @@ export const Collection = ({
               ref={(node) => (itemsRefs.current[gridIndex] = node)}
             >
               <div
-                className="absolute w-full bg-black"
+                className="absolute w-full bg-off-black"
                 style={{ aspectRatio }}
               ></div>
               <img
