@@ -1,8 +1,17 @@
-import { Link } from '@tanstack/react-router';
+import { Link, useNavigate } from '@tanstack/react-router';
 import { useCollections } from '../hooks/use-collections';
 
 export const Home = () => {
+  const navigate = useNavigate({ from: '/' });
   const collections = useCollections();
+
+  const handleThumbnailClick = (id: number, index: number) => {
+    void navigate({
+      to: '/collections/$collectionId',
+      params: { collectionId: String(id) },
+      search: { index },
+    });
+  };
 
   return (
     <main className="col-span-3 col-start-1 row-span-2 row-start-1 grid grid-cols-subgrid grid-rows-subgrid overflow-hidden">
@@ -26,14 +35,19 @@ export const Home = () => {
                   </Link>
                 </h2>
                 <div className="grid grid-cols-[repeat(auto-fill,minmax(1rem,1fr))] gap-1 2xl:grid-cols-[repeat(auto-fill,minmax(1.125rem,1fr))]">
-                  {thumbnails.map(({ path }) => (
-                    <img
+                  {thumbnails.map(({ path }, index) => (
+                    <button
                       key={path}
-                      src={path}
-                      alt=""
-                      className="aspect-[1/5]"
-                      style={{ opacity: thumbnailsConfig.opacity }}
-                    />
+                      tabIndex={-1}
+                      onClick={() => handleThumbnailClick(id, index)}
+                    >
+                      <img
+                        src={path}
+                        alt=""
+                        className="aspect-[1/5]"
+                        style={{ opacity: thumbnailsConfig.opacity }}
+                      />
+                    </button>
                   ))}
                 </div>
               </article>

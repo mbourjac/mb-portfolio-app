@@ -1,11 +1,14 @@
 import { useRef, useState } from 'react';
-import { useLoaderData } from '@tanstack/react-router';
+import { getRouteApi, useLoaderData } from '@tanstack/react-router';
 import { useGridNavigation } from '../../hooks/use-grid-navigation';
 import { cn } from '../../lib/tailwind';
 import { CollectionNav } from './CollectionNav';
 import { CollectionSlides } from './CollectionSlides';
 
+const route = getRouteApi('/_layout/collections/$collectionId');
+
 export const Collection = () => {
+  const indexParam = route.useSearch({ select: (params) => params.index });
   const loaderData = useLoaderData({
     from: '/_layout/collections/$collectionId',
   });
@@ -18,7 +21,7 @@ export const Collection = () => {
     currentItemIndex: selectedPicturesItemIndex,
     setCurrentItemIndex: setSelectedPicturesItemIndex,
     itemsRefs,
-  } = useGridNavigation(gridRef, pictures.length);
+  } = useGridNavigation(gridRef, pictures.length, indexParam);
 
   const selectedPicturesItem = pictures[selectedPicturesItemIndex];
 

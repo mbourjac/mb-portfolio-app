@@ -3,8 +3,9 @@ import { useEffect, useRef, useState, type RefObject } from 'react';
 export const useGridNavigation = <T extends HTMLElement>(
   gridRef: RefObject<T>,
   gridItemsCount: number,
+  initialIndex?: number,
 ) => {
-  const [currentItemIndex, setCurrentItemIndex] = useState(0);
+  const [currentItemIndex, setCurrentItemIndex] = useState(initialIndex ?? 0);
   const [gridColumnsCount, setGridColumnsCount] = useState(0);
   const itemsRefs = useRef<(HTMLElement | null)[]>([]);
 
