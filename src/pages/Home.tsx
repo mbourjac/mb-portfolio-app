@@ -14,11 +14,8 @@ export const Home = () => {
   };
 
   return (
-    <main className="col-span-3 col-start-1 row-span-2 row-start-1 grid grid-cols-subgrid grid-rows-subgrid overflow-hidden">
-      <div className="col-start-1 row-start-2 px-2 pb-2">
-        <div className="h-full bg-off-black"></div>
-      </div>
-      <div className="col-span-2 col-start-2 row-span-2 row-start-1 flex flex-col gap-2 overflow-auto p-2">
+    <main className="grid overflow-hidden">
+      <div className="flex flex-col gap-2 overflow-auto p-2">
         {collections
           .slice()
           .reverse()

@@ -29,15 +29,15 @@ export const Collection = () => {
   };
 
   return (
-    <>
-      <div className="col-start-2 row-span-2 flex flex-col gap-2 overflow-auto p-2">
+    <main className="grid grid-cols-[1fr_3fr] gap-4 overflow-hidden">
+      <div className="flex flex-col gap-2 overflow-auto p-2">
         {Array.isArray(selectedPicturesItem) ?
           <CollectionSlides pictures={selectedPicturesItem} />
         : <img src={selectedPicturesItem!.path} alt="" />}
       </div>
       <div
         ref={gridRef}
-        className="col-start-3 row-span-2 grid w-full grid-cols-[repeat(auto-fill,minmax(5rem,1fr))] gap-x-1 gap-y-4 overflow-auto p-2"
+        className="grid grid-cols-[repeat(auto-fill,minmax(5rem,1fr))] gap-x-1 gap-y-4 overflow-auto p-2"
       >
         {pictures.map((picturesItem, gridIndex) => {
           const { path, aspectRatio, index } =
@@ -82,6 +82,6 @@ export const Collection = () => {
           );
         })}
       </div>
-    </>
+    </main>
   );
 };

@@ -3,9 +3,12 @@ import { Header } from '../../components/Header';
 
 export const AppLayout = () => {
   return (
-    <div className="grid h-screen grid-cols-[11.25rem_23.75rem_1fr] grid-rows-[auto_1fr] gap-x-4">
-      <div className="relative z-10 col-start-1 row-start-1 px-2 pt-2">
-        <Header />
+    <div className="grid h-dvh grid-cols-[14rem_1fr] gap-4">
+      <div className="relative z-10 p-2">
+        <div className="bg-off-black">
+          <Header />
+          <aside id="sidebar"></aside>
+        </div>
       </div>
       <Outlet />
     </div>
